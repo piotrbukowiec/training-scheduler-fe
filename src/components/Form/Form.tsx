@@ -7,7 +7,11 @@ export const Form = ({ handleClick, handleTextChange }: Props) => {
 	return (
 		<>
 			<form>
-				<textarea rows={3} onChange={event => handleTextChange(event)} />
+				<textarea
+					rows={3}
+					placeholder={'Opisz jaki chcesz trening'}
+					onChange={event => handleTextChange(event)}
+				/>
 				<button onClick={event => handleClick(event)}>Generuj trening</button>
 			</form>
 		</>
