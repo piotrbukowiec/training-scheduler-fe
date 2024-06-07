@@ -1,0 +1,14 @@
+.message-container {
+	width: 35vw;
+	padding: 15px;
+	border-radius: 45px;
+	border: 2px solid #ddd;
+	text-align: center;
+	background-color: transparent;
+	color: #ddd;
+}
+
+.message-container > p {
+	background-color: transparent;
+	font-size: 2rem;
+}

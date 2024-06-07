@@ -6,9 +6,13 @@ interface Props {
 }
 
 export const TrainingTable = ({ training }: Props) => {
+	const copyTrainingToClipboard = () => {
+		navigator.clipboard.writeText(JSON.stringify(training));
+		alert('Trening skopiowany do schowka');
+	};
 	return (
 		<>
-			<table>
+			<table onClick={copyTrainingToClipboard}>
 				<thead>
 					<tr>
 						<th colSpan={6}>Trening</th>
@@ -16,9 +20,9 @@ export const TrainingTable = ({ training }: Props) => {
 					<tr>
 						<th>nr ćwiczenia</th>
 						<th>nazwa</th>
-						<th>ilość powtórzeń w rundzie</th>
+						<th>ilość powtórzeń w serii</th>
 						<th>ilość serii</th>
-						<th>czas trwania serii</th>
+						<th>czas trwania serii [s]</th>
 					</tr>
 				</thead>
 				<tbody>

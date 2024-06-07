@@ -5,12 +5,15 @@ import { Form } from '../components/Form/Form';
 import { Training } from '../types/exercise';
 import { TrainingTable } from '../components/TrainingTable/TrainingTable';
 import { Loader } from '../components/Loader/Loader';
+import { post } from '../utils/post';
+import { ErrorBox } from '../components/ErrorBox/ErrorBox';
 
 export const App = () => {
 	const [text, setText] = useState('');
 	const [training, setTraining] = useState<Training | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isError, setIsError] = useState<boolean>(false);
+	const [error, setError] = useState<Error | null>(null);
 
 	const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setText(event.target.value);
@@ -27,29 +30,29 @@ export const App = () => {
 		event.preventDefault();
 		(async () => {
 			setIsLoading(true);
-			try {
-				const res = await fetch('http://localhost:3001/trainings', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ prompt: text }),
-				});
-				const data = await res.json();
-				console.log('TRAINING DATA: ', data);
-				if (data) setIsLoading(false);
-				setTraining(data);
-			} catch (error) {
+			const { error, result: training } = await post({ prompt: text });
+			setIsLoading(false);
+			if (error) {
 				setIsError(true);
-				console.error('Error fetching data:', error);
-			}
+				setError(error);
+			} else setTraining(training);
 		})();
 	};
 
+	let elToReturn = null;
+
+	if (isLoading) elToReturn = <Loader />;
+	else if (isError) {
+		elToReturn = <ErrorBox message={error?.message ?? 'Nieznany błąd'} />;
+	} else if (!training)
+		elToReturn = (
+			<Form handleClick={handleClick} handleTextChange={handleTextChange} />
+		);
+	else elToReturn = <TrainingTable training={training} />;
 	return (
 		<>
 			<div className='container'>
-				{isLoading ? (
+				{/* {isLoading ? (
 					<Loader />
 				) : (
 					!training && (
@@ -59,7 +62,8 @@ export const App = () => {
 						/>
 					)
 				)}
-				{training && <TrainingTable training={training} />}
+				{training && <TrainingTable training={training} />} */}
+				{elToReturn}
 			</div>
 		</>
 	);
