@@ -25,16 +25,27 @@ export const post = async (body: RequestBody): Promise<FetchResult> => {
 			},
 			body: JSON.stringify(body),
 		});
-		if (!res.ok) throw new Error('Failed to fetch');
+		if (!res.ok) {
+			const errMsg =
+				`${res.status}`[0] === '4'
+					? 'Niepoprawne dane wejściowe'
+					: 'Błąd serwera';
+			throw new Error(errMsg);
+		}
 		const training: Training = await res.json();
 		return {
 			result: training,
 			error: null,
 		};
-	} catch (error) {
-		console.error('Error fetching data:', error);
+	} catch (err) {
+		const { message } = err as Error;
+		const errMsg =
+			err instanceof TypeError && message === 'Failed to fetch'
+				? 'Serwer nie odpowiada. Przepraszamy :('
+				: message;
+		console.error('Error fetching data:', errMsg, err);
 		return {
-			error: error instanceof Error ? error : new Error(String(error)),
+			error: new Error(errMsg),
 			result: null,
 		};
 	}

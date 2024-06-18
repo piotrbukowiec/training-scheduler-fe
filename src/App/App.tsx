@@ -49,22 +49,6 @@ export const App = () => {
 			<Form handleClick={handleClick} handleTextChange={handleTextChange} />
 		);
 	else elToReturn = <TrainingTable training={training} />;
-	return (
-		<>
-			<div className='container'>
-				{/* {isLoading ? (
-					<Loader />
-				) : (
-					!training && (
-						<Form
-							handleClick={handleClick}
-							handleTextChange={handleTextChange}
-						/>
-					)
-				)}
-				{training && <TrainingTable training={training} />} */}
-				{elToReturn}
-			</div>
-		</>
-	);
+
+	return <div className='container'>{elToReturn}</div>;
 };
