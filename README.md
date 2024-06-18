@@ -1,30 +1,21 @@
-# React + TypeScript + Vite
+# Training Scheduler - app for generating schedules using OpenAPI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Installation
 
-Currently, two official plugins are available:
+After cloning repository you have to do following actions:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Make sure, that backend repo is copied too and backend is running ([backend repo](https://github.com/piotrbukowiec/training-scheduler-fe)).
+2. Move to project folder (by default its name should be 'trainings-scheduler-fe').
+3. Move to 'frontend' folder.
+4. Execute command `dev` from npm scripts or execute command `vite` in terminal.
+5. Now everything should be working. Describe your training type in input, click the button and see the magic.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## About project
 
-- Configure the top-level `parserOptions` property like this:
+In this project I used OpenAPI with GPT-4o, TypeORM with PostgreSQL and other packages from [npmjs.org](https://npmjs.org)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Good luck and have fun!
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+**_Piotr Bukowiec_**
